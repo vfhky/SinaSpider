@@ -17,6 +17,7 @@ class InformationItem(Item):
     Num_Fans = Field()  # 粉丝数
     Sex_Orientation = Field()  # 性取向
     Marriage = Field()  # 婚姻状况
+    VIPlevel = Field()
     URL = Field()  # 首页链接
 
 
@@ -43,3 +44,8 @@ class FansItem(Item):
     """ 粉丝列表 """
     _id = Field()  # 用户ID
     fans = Field()  # 粉丝
+
+class RelationshipsItem(Item):
+    """ 粉丝列表 """
+    Host1 = Field()  # 用户ID
+    Host2 = Field()  # 粉丝

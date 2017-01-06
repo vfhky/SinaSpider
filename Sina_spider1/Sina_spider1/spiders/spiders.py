@@ -1,7 +1,7 @@
 # encoding=utf-8
 import re
 import datetime
-from scrapy.spider import CrawlSpider
+from scrapy.spiders import CrawlSpider
 from scrapy.selector import Selector
 from scrapy.http import Request
 from Sina_spider1.items import InformationItem, TweetsItem, FollowsItem, FansItem
@@ -11,9 +11,10 @@ class Spider(CrawlSpider):
     name = "sinaSpider"
     host = "http://weibo.cn"
     start_urls = [
-        5235640836, 5676304901, 5871897095, 2139359753, 5579672076, 2517436943, 5778999829, 5780802073, 2159807003,
-        1756807885, 3378940452, 5762793904, 1885080105, 5778836010, 5722737202, 3105589817, 5882481217, 5831264835,
-        2717354573, 3637185102, 1934363217, 5336500817, 1431308884, 5818747476, 5073111647, 5398825573, 2501511785,
+        2674868673
+        #3283412161, 5676304901, 5871897095, 2139359753, 5579672076, 2517436943, 5778999829, 5780802073, 2159807003,
+        #1756807885, 3378940452, 5762793904, 1885080105, 5778836010, 5722737202, 3105589817, 5882481217, 5831264835,
+        #2717354573, 3637185102, 1934363217, 5336500817, 1431308884, 5818747476, 5073111647, 5398825573, 2501511785,
     ]
     scrawl_ID = set(start_urls)  # 记录待爬的微博ID
     finish_ID = set()  # 记录已爬的微博ID
@@ -34,7 +35,8 @@ class Spider(CrawlSpider):
 
             url_follows = "http://weibo.cn/%s/follow" % ID
             url_fans = "http://weibo.cn/%s/fans" % ID
-            url_tweets = "http://weibo.cn/%s/profile?filter=1&page=1" % ID
+            #filter：1只显示原创	0全部
+            url_tweets = "http://weibo.cn/%s/profile?filter=0&page=1" % ID
             url_information0 = "http://weibo.cn/attgroup/opening?uid=%s" % ID
             yield Request(url=url_follows, meta={"item": followsItems, "result": follows},
                           callback=self.parse3)  # 去爬关注人
